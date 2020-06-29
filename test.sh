@@ -22,12 +22,22 @@ assertInstalationStepValid()
     fi
 }
 
+if [ $# -eq 0 ] ; then
+    echo "use -h for help page"
+    exit
+fi
+
 while [ $# -gt 0 ] 
 do 
     case $1 in
     "-i")
         install=1
         shift 1
+        ;;
+
+    "-h")
+        echo "this is help page"
+        exit
         ;;
 
     "--set-test-var")
@@ -104,6 +114,11 @@ do
             stepsToInstall="${stepsToInstall} $1"
             shift 1
         done
+        ;;
+    *)
+        echo "uncnown argument '$1' passed"
+        exit
+        ;;
     esac
 done
 
